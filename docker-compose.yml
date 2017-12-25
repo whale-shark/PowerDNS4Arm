@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  # PowerDNS
+  powerdns:
+    build: ./power_dns
+    restart: always
+    volumes:
+      - ./power_dns/sqlite:/usr/local/pdns/sqlite/
+    ports:
+      - "127.0.0.1:53:53/udp"
+      - 8081:8081
+  
+  # PowerDNS-Admin
+  powerdns_admin:
+    build: ./power_dns_admin
+    restart: always
+    volumes:
+      - ./power_dns_admin/sqlite:/usr/local/bin/PowerDNS-Admin/sqlite/
+    ports: 
+      - 9393:9393
+    links:
+      - powerdns
