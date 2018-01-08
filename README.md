@@ -4,13 +4,21 @@ Minimal PowerDNS and PowerDNS-Admin for ARM.
 
 Backend databease for sqlite3.
 
-Not yet complite!
+Application image
+
+```
+Client computer
+  \/
+PowerDNS Recursor -> local domain Å® PowerDNS Authoritative Server 
+  \/
+other than local domain
+  \/
+Internet
+```
 
 ## TODO
 
-* Install PowerDNS Recursor
-
-* Install reverse proxy
+* Corresponding to uWSGI
 
 ## How to
 
