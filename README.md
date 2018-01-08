@@ -9,7 +9,7 @@ Application image
 ```
 Client computer
   \/
-PowerDNS Recursor -> local domain ¨ PowerDNS Authoritative Server 
+PowerDNS Recursor -> local domain -> PowerDNS Authoritative Server 
   \/
 other than local domain
   \/
