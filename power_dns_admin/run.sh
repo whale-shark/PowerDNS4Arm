@@ -4,7 +4,7 @@ SQLITE_DB_PATH=/usr/local/bin/PowerDNS-Admin/sqlite/pdns_admin_table.db
 
 echo "Check sqliteDB : ${SQLITE_DB_PATH}"
 
-cd /usr/local/bin/PowerDNS-Admin
+cd /usr/local/lib/PowerDNS-Admin
 virtualenv flask
 
 if [ ! -e "${SQLITE_DB_PATH}" ]; then
@@ -16,5 +16,7 @@ if [ ! -e "${SQLITE_DB_PATH}" ]; then
   fi
   echo "Success."
 fi
+
+echo "Start PowerDNS-Admin"
 
 ./run.py

@@ -11,7 +11,7 @@ RUN apt-get update -y; \
 
 RUN apt-get remove -y expect; \
     apt-get clean; \
-    mkdir -vp /usr/local/pdns/sqlite
+    mkdir -vp /usr/local/pdns/sqlite /tmp/pdns
 
 EXPOSE 53 53/udp 8081
 

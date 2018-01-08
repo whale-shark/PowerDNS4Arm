@@ -1,22 +1,60 @@
 version: '3.3'
 services:
+  # Nginx
+  reverse_proxy:
+    build: ./reverse_proxy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./reverse_proxy/conf.d:/etc/nginx/conf.d
+      - ./reverse_proxy/log:/var/log/nginx
+    networks:
+      dockerbr:
+        ipv4_address: 172.31.255.2
+
   # PowerDNS
   powerdns:
     build: ./power_dns
     restart: always
-    volumes:
-      - ./power_dns/sqlite:/usr/local/pdns/sqlite/
     ports:
-      - "127.0.0.1:53:53/udp"
-      - 8081:8081
+      - "5053:5053/udp"
+    volumes:
+      - ./power_dns/sqlite:/usr/local/pdns/sqlite
+      - ./power_dns/log:/var/log
+    networks:
+      dockerbr:
+        ipv4_address: 172.31.255.11
   
+  # PowerDNS Recursor
+  powerdns_recursor:
+    build: ./power_dns_recursor
+    restart: always
+    ports:
+      - "53:53/udp"
+    volumes:
+      - ./power_dns_recursor/log:/var/log
+    networks:
+      dockerbr:
+        ipv4_address: 172.31.255.12
+
   # PowerDNS-Admin
   powerdns_admin:
     build: ./power_dns_admin
     restart: always
     volumes:
-      - ./power_dns_admin/sqlite:/usr/local/bin/PowerDNS-Admin/sqlite/
+      - ./power_dns_admin/sqlite:/usr/local/bin/PowerDNS-Admin/sqlite
+      - ./power_dns_admin/log:/var/log
     ports: 
       - 9393:9393
-    links:
-      - powerdns
+    networks:
+      dockerbr:
+        ipv4_address: 172.31.255.13
+
+networks:
+  dockerbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.31.255.0/24

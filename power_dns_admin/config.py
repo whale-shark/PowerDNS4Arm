@@ -4,7 +4,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 # BASIC APP CONFIG
 WTF_CSRF_ENABLED = True
 SECRET_KEY = 'We are the world'
-BIND_ADDRESS = 'powerdns_admin'
+BIND_ADDRESS = '172.31.255.13'
 PORT = 9393
 LOGIN_TITLE = "PDNS"
 
@@ -13,7 +13,7 @@ TIMEOUT = 10
 
 # LOG CONFIG
 LOG_LEVEL = 'DEBUG'
-LOG_FILE = 'logfile.log'
+LOG_FILE = '/var/log/logfile.log'
 # For Docker, leave empty string
 #LOG_FILE = ''
 
@@ -70,7 +70,7 @@ BASIC_ENABLED = True
 SIGNUP_ENABLED = True
 
 # POWERDNS CONFIG
-PDNS_STATS_URL = 'http://powerdns:8081/'
+PDNS_STATS_URL = 'http://172.31.255.11:8081/'
 PDNS_API_KEY = 'powerdns'
 PDNS_VERSION = '4.0.3'
 
